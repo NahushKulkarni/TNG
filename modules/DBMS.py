@@ -9,25 +9,27 @@ class DataBase:
         self.URLDB = self.DBClient.URLDB
         self.URLCollection = self.URLDB.URLCollection
 
-    def addToContentRepository(keys, values, self):
+    def addToContentRepository(self, keys, values):
         dataDict = zip(keys, values)
         success = self.CRCollection.insert(dataDict)
         return success
 
-    def listContentRepository(key, value, self):
+    def listContentRepository(self, key, value):
         data = self.CRCollection.find({key, value})
         return data
 
-    def deleteFromContentRepository(id, self):
+    def deleteFromContentRepository(self, id):
         success = self.CRCollection.remove({'_id': id})
         return success
 
-    def addToURLStore(keys, values, self):
-        dataDict = zip(keys, values)
+    def addToURLStore(self, values):
+        keys = len(values) * ["URL", ]
+        dataDict = dict(zip(keys, values))
+        print("addToURLStore: ", dataDict)
         success = self.URLCollection.insert(dataDict)
         return success
 
-    def listURLStore(key, value, self):
+    def listURLStore(self, key, value):
         data = self.URLCollection.find({key, value})
         return data
 
@@ -35,6 +37,10 @@ class DataBase:
         data = self.URLCollection.find_one()
         return data
 
-    def deleteFromURLStore(id, self):
+    def deleteFromURLStore(self, id):
         success = self.URLCollection.remove({'_id': id})
         return success
+
+    def getURLID(self, URL):
+        data = self.URLCollection.find_one({'URL': URL})
+        return data['_id']

@@ -3,37 +3,35 @@ ExclusionTable = ["the", "be", "to", "of", "and", "a", "in", "that", "have", "I"
 
 TopLevelThreshold = 50
 
-global DB
-
 
 def parse(crawlResults):
-    global DB
-    for link in crawlResults['links']:
-        DB.addToURLStore('URL', link)
-
     textualData = crawlResults['headings'] + crawlResults['text']
+
+    pageDiscription = ""
     if len(crawlResults['meta']) > 0:
         pageDiscription = crawlResults['meta'][0]
-    else:
-        pageDiscription = ""
-    mediaData = crawlResults['images'] + crawlResults['videos']
+
+    mediaData = crawlResults['images'] + \
+        crawlResults['videos'] + crawlResults['audios'] + \
+        crawlResults['documents']
+
     textOccurance = OccuranceTable(textualData)
 
     for ET in ExclusionTable:
         if ET in textOccurance:
-            textOccurance.remove(ET)
+            textOccurance.pop(ET)
 
     textOccurance = sorted(textOccurance.items(),
                            key=lambda x: x[1], reverse=True)
     textOccurance = textOccurance[:TopLevelThreshold]
 
-    return {'Description': pageDiscription, 'OccuranceTable': textOccurance, 'MediaURLs': mediaData}
+    return {'Description': pageDiscription, 'pageTitle': crawlResults['title'], 'OccuranceTable': textOccurance, 'MediaURLs': mediaData, 'ContactURLs': crawlResults['contacts']}
 
 
 def OccuranceTable(textualData):
     Occurance = {}
     for entry in textualData:
-        extry = extry.lower()
+        entry = entry.lower()
         for word in entry.split():
             if word in Occurance:
                 Occurance[word] += 1
