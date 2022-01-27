@@ -38,9 +38,12 @@ def process(crawlURL):
         if crawlResults is None:
             return False
         print(crawlResults)
-        # parseResults = Parser.parse(crawlResults)
-        # print("Finished parsing on {URL} at {Time}".format(
-        #     URL=crawlURL, Time=datetime.now()))
+        parseResults = Parser.parse(crawlResults)
+        print("Finished parsing on {URL} at {Time}".format(
+            URL=crawlURL, Time=datetime.now()))
+        if parseResults is None:
+            return False
+        print(parseResults)
         # indexResults = Indexer.index(parseResults)
         # print("Finished indexing on {URL} at {Time}".format(
         #     URL=crawlURL, Time=datetime.now()))

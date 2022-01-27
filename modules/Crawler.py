@@ -7,6 +7,9 @@ validProts = ['https://']
 validSubDomains = ['www.', 'm.']
 validComms = ['mailto:', 'tel:', 'skype:',
               'whatsapp:', 'telegram:', 'sms:']
+validImages = ['jpg', 'png', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'tiff', 'ico',
+               'tif', 'tiff', 'jfif', 'jpe', 'jfif-tbnl', 'jxr', 'pjpeg', 'pjp', 'bpg']
+validVideos = ['mp4', 'mov', 'wmv', 'avi', 'flv', 'swf', 'mkv', 'webm']
 
 
 def crawl(url):
@@ -132,17 +135,15 @@ def getTitle(html):
 
 def moveToImages(videos, images):
     try:
-        MaxLimit = len(videos)
-        for i in range(MaxLimit):
-            if videos[i].endswith('.jpg') or videos[i].endswith('.png') or videos[i].endswith('.jpeg') or videos[i].endswith('.gif'):
-                images.append(videos[i])
-                videos.remove(videos[i])
-                MaxLimit -= 1
-                i -= 1
-            if i == (MaxLimit - 1):
-                break
+        videos_new = []
+        for video in videos:
+            extension = video.split('.')[-1].lower()
+            if extension in validVideos:
+                videos_new.append(video)
+            elif extension in validImages:
+                images.append(video)
     finally:
-        return videos, images
+        return videos_new, images
 
 
 def convertRelativeLinks(links, url):
