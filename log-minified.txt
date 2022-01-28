@@ -1,0 +1,79 @@
+Starting to crawl on https://en.wikipedia.org/wiki/Google at 2022-01-17 01:01:46.026333
+Finished crawling on https://en.wikipedia.org/wiki/Google at 2022-01-17 01:01:53.817766
+
+
+{'links': ['https://en.wikipedia.org/wiki/The_Internship',
+'https://en.wikipedia.org/wiki/Google_Play_Games',
+'https://en.wikipedia.org/wiki/Snapseed',
+'https://en.wikipedia.org/wiki/Rakuten',
+'https://en.wikipedia.org/wiki/China',
+'https://web.archive.org/web/20080503233009/http://www.informationweek.com/news/internet/webdev/showArticle.jhtml?articleID=202600809',
+'https://en.wikipedia.org/wiki/Google_Buzz',
+'https://en.wikipedia.org/wiki/Tony_Fadell',
+'https://en.wikipedia.org/wiki/Stackdriver',
+'https://en.wikipedia.org/wiki/Google_Desktop'],
+
+'meta': [],
+
+
+'title': ['Google - Wikipedia'],
+
+
+'documents': ['https://web.archive.org/web/20150927004511/http://infolab.stanford.edu/pub/papers/google.pdf',
+'https://www.webcitation.org/659XUbJTj?url=http://investor.google.com/pdf/2004_AnnualReport.pdf',
+'https://web.archive.org/web/20130502193637/http://pdf.secdatabase.com/44/0001193125-12-025336.pdf',
+'https://web.archive.org/web/20091214182753/http://research.google.com/archive/googlecluster-ieee.pdf',
+'https://abc.xyz/investor/static/pdf/20201030_alphabet_10Q.pdf',
+'https://research.google.com/archive/googlecluster-ieee.pdf',
+'https://www.dhillonlaw.com/wp-content/uploads/2018/04/20180418-Damore-et-al.-v.-Google-FAC_Endorsed.pdf',
+'https://archive.today/20201230042646/https://abc.xyz/investor/static/pdf/20201030_alphabet_10Q.pdf'],
+
+
+'contacts': [],
+
+
+'images': ['https://en.wikipedia.org//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1',
+'https://en.wikipedia.org/static/images/footer/wikimedia-button.png',
+'https://en.wikipedia.org/static/images/footer/poweredby_mediawiki_88x31.png',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/en/thumb/1/1b/Semi-protection-shackle.svg/20px-Semi-protection-shackle.svg.png',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/250px-Googleplex_HQ_%28cropped%29.jpg',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/10px-OOjs_UI_icon_edit-ltr-progressive.svg.png',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/10px-OOjs_UI_icon_edit-ltr-progressive.svg.png',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/commons/thumb/6/69/Schmidt-Brin-Page-20080520.jpg/220px-Schmidt-Brin-Page-20080520.jpg',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/en/thumb/b/b7/Google1998.png/250px-Google1998.png',
+'https://en.wikipedia.org//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Eric_Schmidt_at_the_37th_G8_Summit_in_Deauville_037.jpg/170px-Eric_Schmidt_at_the_37th_G8_Summit_in_Deauville_037.jpg',
+'https://en.wikipedia.org/static/images/footer/wikimedia-button.png'],
+
+
+'videos': [],
+
+
+'audios': [],
+
+
+'headings': ['History',
+'Early years',
+'Growth',
+'Initial public offering',
+'2012 onward',
+'Products and services',
+'Search engine',
+'Advertising',
+'Consumer services',
+'Web-based services'],
+
+
+'text': ['Google LLC is an American multinational technology company that specializes in Internet-related services and products,
+which include online advertising technologies,
+a search engine,
+cloud computing,
+software,
+and hardware. It is considered one of the Big Five companies in the American information technology industry,
+along with Amazon,
+Apple,
+Meta (Facebook) \\nand Microsoft.&#91;10&#93;\\n',
+"Google was founded on September 4]}
+
+
+Time taken for https://en.wikipedia.org/wiki/Google: 0:00:07.792463
+Exited at 2022-01-17 01:01:53.819485
