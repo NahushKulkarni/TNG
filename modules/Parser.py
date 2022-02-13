@@ -33,8 +33,14 @@ def parse(crawlResults):
     return {'Description': pageDiscription, 'pageTitle': crawlResults['title'], 'OccuranceTable': textOccurance, 'MediaURLs': mediaData, 'ContactURLs': crawlResults['contacts'], 'Summary': Summary}
 
 
-def RemovePunctuation(text):
-    return text.translate(str.maketrans('', '', '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'))
+def RemovePunctuation(text, exceptions=None):
+    punctuations = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    if exceptions == None:
+        return text.translate(str.maketrans('', '', punctuations))
+    else:
+        for e in exceptions:
+            punctuations = punctuations.replace(e, '')
+        return text.translate(str.maketrans('', '', punctuations))
 
 
 def RemoveHTMLEntities(text):
@@ -60,9 +66,11 @@ def OccuranceTable(textualData):
 def Summarize(text):
     text = ' '.join(text)
     text = RemoveHTMLEntities(text)
-    text = RemovePunctuation(text)
+    print("=============================================Summarize=============================================")
+    print(text)
+    print("=============================================Summarize=============================================")
     summarizer = pipeline(
         'summarization', model="t5-small", device="0")
-    summary = summarizer(text, max_length=500,
+    summary = summarizer(text, max_length=1000,
                          min_length=100, do_sample=False)[0]['summary_text']
     return summary
