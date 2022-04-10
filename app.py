@@ -9,9 +9,16 @@ from timeit import timeit
 threadList = []
 global DB
 
+count = 0
+
 
 def main():
-    startThreadAtURL(DB.getFirstURL()['URL'])
+    global count
+    success = startThreadAtURL(DB.getFirstURL()['URL'])
+    if success == True and count < 10:
+        count += 1
+        print("Count: ", count)
+        main()
     return True
 
 
@@ -37,18 +44,16 @@ def process(crawlURL):
             URL=crawlURL, Time=datetime.now()))
         if crawlResults is None:
             return False
-        print(crawlResults)
         parseResults = Parser.parse(crawlResults)
         print("Finished parsing on {URL} at {Time}".format(
             URL=crawlURL, Time=datetime.now()))
         if parseResults is None:
             return False
-        print(parseResults)
-        # indexResults = Indexer.index(parseResults)
-        # print("Finished indexing on {URL} at {Time}".format(
-        #     URL=crawlURL, Time=datetime.now()))
-        # appendURLs(crawlURL, crawlResults)
-        # print(crawlResults, parseResults, indexResults)
+        indexResults = Indexer.index(parseResults, crawlURL, DB)
+        print("Finished indexing on {URL} at {Time}".format(
+            URL=crawlURL, Time=datetime.now()))
+        Indexer.appendURLs(crawlURL, crawlResults, DB)
+        print(crawlResults, parseResults, indexResults)
         end = datetime.now()
         print("Time taken for {URL}: {Time}".format(
             URL=crawlURL, Time=end-start))
@@ -58,17 +63,8 @@ def process(crawlURL):
         return False
 
 
-def appendURLs(crawlURL, crawlResults):
-    try:
-        # DB.deleteFromURLStore(DB.getURLID(crawlURL))
-        # DB.addToURLStore(crawlResults['links'])
-        return True
-    except Exception as e:
-        print(e)
-        return False
-
-
 if __name__ == '__main__':
     DB = DataBase()
-    main()
+    success = main()
+    print(success)
     print("Exited at {Time}".format(Time=datetime.now()))

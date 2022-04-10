@@ -1,3 +1,4 @@
+from logging import exception
 from pymongo import MongoClient
 
 
@@ -10,8 +11,8 @@ class DataBase:
         self.URLCollection = self.URLDB.URLCollection
 
     def addToContentRepository(self, keys, values):
-        dataDict = zip(keys, values)
-        success = self.CRCollection.insert(dataDict)
+        dataDict = dict(zip(keys, values))
+        success = self.CRCollection.insert_one(dataDict)
         return success
 
     def listContentRepository(self, key, value):
@@ -24,9 +25,9 @@ class DataBase:
 
     def addToURLStore(self, values):
         keys = len(values) * ["URL", ]
-        dataDict = dict(zip(keys, values))
-        print("addToURLStore: ", dataDict)
-        success = self.URLCollection.insert(dataDict)
+        dataDict = [{k: v} for k, v in zip(keys, values)]
+        print("dataDict: ", dataDict)
+        success = self.URLCollection.insert_many(dataDict)
         return success
 
     def listURLStore(self, key, value):
