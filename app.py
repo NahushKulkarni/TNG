@@ -9,16 +9,12 @@ from timeit import timeit
 threadList = []
 global DB
 
-count = 0
-
 
 def main():
-    global count
-    success = startThreadAtURL(DB.getFirstURL()['URL'])
-    if success == True and count < 10:
-        count += 1
-        print("Count: ", count)
-        main()
+    URL = DB.getFirstURL()
+    if URL == None:
+        return False
+    startThreadAtURL(URL['URL'])
     return True
 
 
@@ -65,6 +61,6 @@ def process(crawlURL):
 
 if __name__ == '__main__':
     DB = DataBase()
-    success = main()
-    print(success)
+    while True:
+        main()
     print("Exited at {Time}".format(Time=datetime.now()))

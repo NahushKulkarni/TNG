@@ -1,5 +1,5 @@
 def index(parseResult, URL, DB):
-    return DB.addToContentRepository([URL], [parseResult])
+    return DB.addToContentRepository(dataDict=parseResult)
 
 
 def appendURLs(crawlURL, crawlResults, DB):

@@ -4,14 +4,14 @@ from pymongo import MongoClient
 
 class DataBase:
     def __init__(self):
-        self.DBClient = MongoClient('mongodb://localhost:27017/')
-        self.CRDB = self.DBClient.CrawlerDB
-        self.CRCollection = self.CRDB.CrawlerCollection
-        self.URLDB = self.DBClient.URLDB
-        self.URLCollection = self.URLDB.URLCollection
+        self.DBClient = MongoClient('mongodb://13.232.119.92:27017/')
+        self.DB = self.DBClient.WebPilot
+        self.CRCollection = self.DB.DataStore
+        self.URLCollection = self.DB.URLStore
 
-    def addToContentRepository(self, keys, values):
-        dataDict = dict(zip(keys, values))
+    def addToContentRepository(self, keys=[], values=[], dataDict=None):
+        if dataDict == None:
+            dataDict = dict(zip(keys, values))
         success = self.CRCollection.insert_one(dataDict)
         return success
 
@@ -26,7 +26,6 @@ class DataBase:
     def addToURLStore(self, values):
         keys = len(values) * ["URL", ]
         dataDict = [{k: v} for k, v in zip(keys, values)]
-        print("dataDict: ", dataDict)
         success = self.URLCollection.insert_many(dataDict)
         return success
 
@@ -36,6 +35,10 @@ class DataBase:
 
     def getFirstURL(self):
         data = self.URLCollection.find_one()
+        inCR = self.CRCollection.find_one({'URL': data['URL']})
+        if inCR != None and inCR != "":
+            self.deleteFromURLStore(data['_id'])
+            return None
         return data
 
     def deleteFromURLStore(self, id):

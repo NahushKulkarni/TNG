@@ -30,7 +30,7 @@ def crawl(url):
             audios = convertRelativeLinks(getAudios(html), url)
             headings = removeTags(getHeadings(html))
             text = removeTags(getText(html))
-            return {'links': links, 'meta': meta, 'title': title, 'documents': documents, 'contacts': contacts, 'images': images, 'videos': videos, 'audios': audios, 'headings': headings, 'text': text}
+            return {'url': url, 'links': links, 'meta': meta, 'title': title, 'documents': documents, 'contacts': contacts, 'images': images, 'videos': videos, 'audios': audios, 'headings': headings, 'text': text}
         except Exception as e:
             print(e)
             return None

@@ -32,7 +32,7 @@ def parse(crawlResults):
                            key=lambda x: x[1], reverse=True)
     textOccurance = textOccurance[:TopLevelThreshold]
 
-    return {'Description': pageDiscription, 'pageTitle': crawlResults['title'], 'OccuranceTable': textOccurance, 'MediaURLs': mediaData, 'ContactURLs': crawlResults['contacts'], 'Summary': Summary}
+    return {'URL': crawlResults['url'], 'Description': pageDiscription, 'pageTitle': crawlResults['title'], 'OccuranceTable': textOccurance, 'MediaURLs': mediaData, 'ContactURLs': crawlResults['contacts'], 'Summary': Summary}
 
 
 def RemovePunctuation(text, exceptions=None):
