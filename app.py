@@ -36,20 +36,20 @@ def process(crawlURL):
     try:
         start = datetime.now()
         crawlResults = Crawler.crawl(crawlURL)
-        print("Finished crawling on {URL} at {Time}".format(
-            URL=crawlURL, Time=datetime.now()))
+        # print("Finished crawling on {URL} at {Time}".format(
+        #     URL=crawlURL, Time=datetime.now()))
         if crawlResults is None:
             return False
         parseResults = Parser.parse(crawlResults)
-        print("Finished parsing on {URL} at {Time}".format(
-            URL=crawlURL, Time=datetime.now()))
+        # print("Finished parsing on {URL} at {Time}".format(
+        #     URL=crawlURL, Time=datetime.now()))
         if parseResults is None:
             return False
         indexResults = Indexer.index(parseResults, crawlURL, DB)
-        print("Finished indexing on {URL} at {Time}".format(
-            URL=crawlURL, Time=datetime.now()))
+        # print("Finished indexing on {URL} at {Time}".format(
+        #     URL=crawlURL, Time=datetime.now()))
         Indexer.appendURLs(crawlURL, crawlResults, DB)
-        print(crawlResults, parseResults, indexResults)
+        # print(crawlResults, parseResults, indexResults)
         end = datetime.now()
         print("Time taken for {URL}: {Time}".format(
             URL=crawlURL, Time=end-start))
