@@ -22,7 +22,7 @@ def parse(crawlResults):
 
     Summary = ""
     textLength = crawlResults['text']
-    if textLength in range(2000, 10000):
+    if textLength in range(1000, 10000):
         Summary = Summarize(crawlResults['text'])
 
     textOccurance = OccuranceTable(textualData)
