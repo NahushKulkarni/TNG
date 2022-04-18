@@ -4,10 +4,11 @@ from pymongo import MongoClient
 
 class DataBase:
     def __init__(self):
-        self.DBClient = MongoClient('mongodb://13.232.119.92:27017/')
+        self.DBClient = MongoClient('mongodb://52.66.250.208:27017/')
         self.DB = self.DBClient.WebPilot
         self.CRCollection = self.DB.DataStore
         self.URLCollection = self.DB.URLStore
+        self.LastURL = ""
 
     def addToContentRepository(self, keys=[], values=[], dataDict=None):
         if dataDict == None:
@@ -36,9 +37,14 @@ class DataBase:
     def getFirstURL(self):
         data = self.URLCollection.find_one()
         inCR = self.CRCollection.find_one({'URL': data['URL']})
-        if inCR != None and inCR != "":
+        if (inCR != None and inCR != "") or (data['URL'] == self.LastURL):
             self.deleteFromURLStore(data['_id'])
             return None
+        self.LastURL = data['URL']
+        return data
+
+    def getXUrls(self, x):
+        data = self.URLCollection.find({}).limit(x)
         return data
 
     def deleteFromURLStore(self, id):

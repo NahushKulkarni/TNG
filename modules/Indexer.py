@@ -4,7 +4,6 @@ def index(parseResult, URL, DB):
 
 def appendURLs(crawlURL, crawlResults, DB):
     try:
-        DB.deleteFromURLStore(DB.getURLID(crawlURL))
         DB.addToURLStore(crawlResults['links'])
         return True
     except Exception as e:

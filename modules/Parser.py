@@ -20,7 +20,10 @@ def parse(crawlResults):
         crawlResults['videos'] + crawlResults['audios'] + \
         crawlResults['documents']
 
-    Summary = Summarize(crawlResults['text'])
+    Summary = ""
+    textLength = crawlResults['text']
+    if textLength in range(2000, 10000):
+        Summary = Summarize(crawlResults['text'])
 
     textOccurance = OccuranceTable(textualData)
 
