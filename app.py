@@ -9,7 +9,7 @@ import os
 import pickle
 import psutil
 
-threadList = []
+global threadList
 global DB
 
 global AvgTime
@@ -17,6 +17,7 @@ global AvgTime
 
 def main():
     global AvgTime
+    global threadList
     AvailThreads = psutil.cpu_count()
     URLList = DB.getXUrls(AvailThreads)
     for URL in URLList:
@@ -38,6 +39,7 @@ def main():
 
 def startThreadAtURL(crawlURL):
     try:
+        global threadList
         newThread = Thread(target=process, args=(crawlURL,))
         threadList.append(newThread)
         newThread.start()
@@ -106,6 +108,7 @@ def setAvgTime(AvgTime):
 
 if __name__ == '__main__':
     DB = DataBase()
+    threadList = []
     AvgTime = getAvgTime()
     while True:
         main()
