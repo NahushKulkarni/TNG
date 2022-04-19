@@ -8,3 +8,5 @@ Werkzeug==2.0.2
 tensorflow
 tensorflow-addons
 transformers
+pickle
+psutil

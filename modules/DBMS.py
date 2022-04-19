@@ -1,17 +1,19 @@
+from logging import exception
 from pymongo import MongoClient
 
 
 class DataBase:
     def __init__(self):
-        self.DBClient = MongoClient('mongodb://localhost:27017/')
-        self.CRDB = self.DBClient.CrawlerDB
-        self.CRCollection = self.CRDB.CrawlerCollection
-        self.URLDB = self.DBClient.URLDB
-        self.URLCollection = self.URLDB.URLCollection
+        self.DBClient = MongoClient('mongodb://52.66.250.208:27017/')
+        self.DB = self.DBClient.WebPilot
+        self.CRCollection = self.DB.DataStore
+        self.URLCollection = self.DB.URLStore
+        self.LastURL = ""
 
-    def addToContentRepository(self, keys, values):
-        dataDict = zip(keys, values)
-        success = self.CRCollection.insert(dataDict)
+    def addToContentRepository(self, keys=[], values=[], dataDict=None):
+        if dataDict == None:
+            dataDict = dict(zip(keys, values))
+        success = self.CRCollection.insert_one(dataDict)
         return success
 
     def listContentRepository(self, key, value):
@@ -24,9 +26,8 @@ class DataBase:
 
     def addToURLStore(self, values):
         keys = len(values) * ["URL", ]
-        dataDict = dict(zip(keys, values))
-        print("addToURLStore: ", dataDict)
-        success = self.URLCollection.insert(dataDict)
+        dataDict = [{k: v} for k, v in zip(keys, values)]
+        success = self.URLCollection.insert_many(dataDict)
         return success
 
     def listURLStore(self, key, value):
@@ -35,6 +36,15 @@ class DataBase:
 
     def getFirstURL(self):
         data = self.URLCollection.find_one()
+        inCR = self.CRCollection.find_one({'URL': data['URL']})
+        if (inCR != None and inCR != "") or (data['URL'] == self.LastURL):
+            self.deleteFromURLStore(data['_id'])
+            return None
+        self.LastURL = data['URL']
+        return data
+
+    def getXUrls(self, x):
+        data = self.URLCollection.find({}).limit(x)
         return data
 
     def deleteFromURLStore(self, id):
