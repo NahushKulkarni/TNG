@@ -1,6 +1,5 @@
 import re
 import urllib.request
-from tqdm import tqdm
 
 validRefs = ['/', '//']
 validProts = ['https://']

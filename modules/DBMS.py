@@ -1,4 +1,3 @@
-from logging import exception
 from pymongo import MongoClient
 
 
