@@ -1,8 +1,8 @@
-def index(parseResult, URL, DB):
+def index(parseResult, DB):
     return DB.addToContentRepository(dataDict=parseResult)
 
 
-def appendURLs(crawlURL, crawlResults, DB):
+def appendURLs(crawlResults, DB):
     try:
         DB.addToURLStore(crawlResults['links'])
         return True

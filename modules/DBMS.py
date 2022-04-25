@@ -1,10 +1,9 @@
-from logging import exception
 from pymongo import MongoClient
 
 
 class DataBase:
     def __init__(self):
-        self.DBClient = MongoClient('mongodb://52.66.250.208:27017/')
+        self.DBClient = MongoClient('mongodb://43.204.111.103:27017/')
         self.DB = self.DBClient.WebPilot
         self.CRCollection = self.DB.DataStore
         self.URLCollection = self.DB.URLStore
